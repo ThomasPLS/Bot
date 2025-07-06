@@ -13,12 +13,16 @@ CHANNEL_ID = 1265631325017215006
 IMAGE_FOLDER = "images"
 
 intents = discord.Intents.default()
+intents.guilds = True
 client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
     print(f"Connecté en tant que {client.user}")
     channel = client.get_channel(CHANNEL_ID)
+    if channel is None:
+        print(f"Le canal avec l'ID {CHANNEL_ID} est introuvable.")
+        return
 
     while True:
         try:
